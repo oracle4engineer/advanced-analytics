@@ -2,7 +2,7 @@
 <WorkflowProcess Version="12.2.0.0.1" DBVersion="12.2.0.1.0" Schema="" xmlns="http://xmlns.oracle.com/odmr11">
     <Nodes>
         <DataSource Id="10001" Name="FRUIT_TABLE" Status="Complete">
-            <Icon XCOORD="106" YCOORD="129"></Icon>
+            <Icon XCOORD="124" YCOORD="130"></Icon>
             <Messages/>
             <Parallelism Enable="false">
                 <SystemDetermined/>
@@ -40,7 +40,7 @@ from "DMUSER"."FRUIT_TABLE"  )</SQLExpression>
             </DataGuideSettings>
         </DataSource>
         <CreateTable TableName="FRUIT_UNPIVOT" Table="true" AutoSpec="Yes" Id="10004" Name="FRUIT_UNPIVOT" Status="Ready">
-            <Icon XCOORD="202" YCOORD="323"></Icon>
+            <Icon XCOORD="172" YCOORD="279"></Icon>
             <Messages/>
             <Parallelism Enable="false">
                 <SystemDetermined/>
@@ -67,8 +67,8 @@ from "DMUSER"."FRUIT_TABLE"  )</SQLExpression>
                 <TableCompression>ROW STORE COMPRESS</TableCompression>
             </CreateTableOptions>
         </CreateTable>
-        <CreateTable TableName="OUTPUT_4_3" Table="true" Id="10016" Name="FRUIT_SUGGESTION" Status="Complete">
-            <Icon XCOORD="874" YCOORD="132"></Icon>
+        <CreateTable TableName="FRUIT_SUGGESTION" Table="true" AutoSpec="Yes" Id="10016" Name="FRUIT_SUGGESTION" Status="Complete">
+            <Icon XCOORD="804" YCOORD="268"></Icon>
             <Messages/>
             <Parallelism Enable="false">
                 <SystemDetermined/>
@@ -83,7 +83,7 @@ from "DMUSER"."FRUIT_TABLE"  )</SQLExpression>
  "CONSEQUENT" ,
  "SUPPORT" ,
  "CONFIDENCE" ,
- "LIFT"  FROM "OUTPUT_4_3")</SQLExpression>
+ "LIFT"  FROM "FRUIT_SUGGESTION")</SQLExpression>
             <DBAttributes>
                 <DBAttribute Key="No" Index="No" Name="ANTECEDENT" DataType="VARCHAR2" Status="Valid"/>
                 <DBAttribute Key="No" Index="No" Name="CONSEQUENT" DataType="VARCHAR2" Status="Valid"/>
@@ -92,17 +92,13 @@ from "DMUSER"."FRUIT_TABLE"  )</SQLExpression>
                 <DBAttribute Key="No" Index="No" Name="LIFT" DataType="NUMBER" Status="Valid"/>
             </DBAttributes>
             <JSONColumns/>
-            <DataGuideSettings Generate="true" UseFullData="false" UseFullDoc="false">
-                <NumberOfRows>2000</NumberOfRows>
-                <NumberOfValues>10000</NumberOfValues>
-            </DataGuideSettings>
             <CreateTableOptions>
                 <Logging>NOLOGGING</Logging>
                 <TableCompression>ROW STORE COMPRESS</TableCompression>
             </CreateTableOptions>
         </CreateTable>
         <AssociationBuild MaxDistinctItemValue="10" ASSO_GENERATE_PREPROCESSED_TABLE="false" ASSO_PREPROCESSED_TABLE_NAME="NONE" MaxNumPartitions="1000" ODMS_SAMPLING="false" Id="10007" Name="相関構築" Status="Complete">
-            <Icon XCOORD="409" YCOORD="131"></Icon>
+            <Icon XCOORD="390" YCOORD="130"></Icon>
             <Messages/>
             <Parallelism Enable="false">
                 <SystemDetermined/>
@@ -118,12 +114,12 @@ from "DMUSER"."FRUIT_TABLE"  )</SQLExpression>
             </MiningAttributes>
             <ItemID Name="KEY_NAME" DataType="VARCHAR2" Status="Valid"/>
             <Models>
-                <AprioriModel Id="10006" Name="ASSOC_AP_1_3" Status="Complete" CreationDate="2017-08-07T15:32:38" Annotation="" UseForOutput="true">
+                <AprioriModel Id="10018" Name="ASSOC_AP_1_6" Status="Complete" CreationDate="2017-08-07T18:00:37" Annotation="" UseForOutput="true">
                     <InputMiningData DataUsage="MANUAL" MiningUsage="MANUAL">
                         <MiningAttributes>
-                            <MiningAttribute AutoPrep="Yes" MiningType="Numerical" Input="Yes" Name="TRANSACTION_ID" DataType="NUMBER" Status="Valid"/>
                             <MiningAttribute AutoPrep="Yes" MiningType="Categorical" Input="Yes" Name="KEY_NAME" DataType="VARCHAR2" Status="Valid"/>
                             <MiningAttribute AutoPrep="Yes" MiningType="Numerical" Input="Yes" Name="NUM_SALES" DataType="NUMBER" Status="Valid"/>
+                            <MiningAttribute AutoPrep="Yes" MiningType="Numerical" Input="Yes" Name="TRANSACTION_ID" DataType="NUMBER" Status="Valid"/>
                         </MiningAttributes>
                     </InputMiningData>
                     <AprioriAlgo ASSO_FILTERS_ACTIVE="false">
@@ -137,7 +133,7 @@ from "DMUSER"."FRUIT_TABLE"  )</SQLExpression>
             </Models>
         </AssociationBuild>
         <AssociationBuild MaxDistinctItemValue="10" ASSO_GENERATE_PREPROCESSED_TABLE="false" ASSO_PREPROCESSED_TABLE_NAME="NONE" MaxNumPartitions="1000" ODMS_SAMPLING="false" Id="10012" Name="相関構築 support=0.5" Status="Complete">
-            <Icon XCOORD="409" YCOORD="273"></Icon>
+            <Icon XCOORD="387" YCOORD="268"></Icon>
             <Messages/>
             <Parallelism Enable="false">
                 <SystemDetermined/>
@@ -153,7 +149,7 @@ from "DMUSER"."FRUIT_TABLE"  )</SQLExpression>
             </MiningAttributes>
             <ItemID Name="KEY_NAME" DataType="VARCHAR2" Status="Valid"/>
             <Models>
-                <AprioriModel Id="10011" Name="ASSOC_AP_2_3" Status="Complete" CreationDate="2017-08-07T15:33:15" Annotation="" UseForOutput="true">
+                <AprioriModel Id="10019" Name="ASSOC_AP_2_6" Status="Complete" CreationDate="2017-08-07T18:02:09" Annotation="" UseForOutput="true">
                     <InputMiningData DataUsage="MANUAL" MiningUsage="MANUAL">
                         <MiningAttributes>
                             <MiningAttribute AutoPrep="Yes" MiningType="Numerical" Input="Yes" Name="TRANSACTION_ID" DataType="NUMBER" Status="Valid"/>
@@ -172,7 +168,7 @@ from "DMUSER"."FRUIT_TABLE"  )</SQLExpression>
             </Models>
         </AssociationBuild>
         <ModelDetails Id="10009" Name="モデル詳細" Status="Complete">
-            <Icon XCOORD="563" YCOORD="132"></Icon>
+            <Icon XCOORD="536" YCOORD="268"></Icon>
             <Messages/>
             <Parallelism Enable="false">
                 <SystemDetermined/>
@@ -185,7 +181,7 @@ from "DMUSER"."FRUIT_TABLE"  )</SQLExpression>
             </CacheSettings>
             <SQLExpression>"N$10009" as (
      SELECT CAST('DMUSER' AS VARCHAR2(128)) as "MODEL_SCHEMA", 
-     CAST('ASSOC_AP_1_3' AS VARCHAR2(128)) as "MODEL_NAME", 
+     CAST('ASSOC_AP_2_6' AS VARCHAR2(128)) as "MODEL_NAME", 
      PARTITION_NAME as "PARTITION_NAME", 
      RULE_ID as "ID", 
      CAST(XMLQUERY('string-join(//item/string-join(("KEY_NAME", item_name),".") , ", ")' PASSING ANTECEDENT RETURNING CONTENT) AS VARCHAR2(4000)) as "ANTECEDENT_ITEMS",
@@ -197,10 +193,10 @@ from "DMUSER"."FRUIT_TABLE"  )</SQLExpression>
      ANTECEDENT_SUPPORT AS "ANTECEDENT_SUPPORT",
      CONSEQUENT_SUPPORT AS CONSEQUENT_SUPPORT,
      NUMBER_OF_ITEMS - 1 AS LENGTH
-     FROM DMUSER.DM$VRASSOC_AP_1_3 )</SQLExpression>
+     FROM DMUSER.DM$VRASSOC_AP_2_6 )</SQLExpression>
             <ModelDetailsOutput Type="ARRulesStringVersion" MiningFunction="ASSOCIATION" MiningAlgorithm="APRIORI_ASSOCIATION_RULES" AutoSpec="Yes">
                 <Models>
-                    <Model IsModelBuilt="false" NodeId="10007" Schema="" Name="ASSOC_AP_1_3" MiningFunction="ASSOCIATION" MiningAlgorithm="APRIORI_ASSOCIATION_RULES" Status="Valid" UseForOutput="true" ModelId="10006"/>
+                    <Model IsModelBuilt="false" NodeId="10012" Schema="" Name="ASSOC_AP_2_6" MiningFunction="ASSOCIATION" MiningAlgorithm="APRIORI_ASSOCIATION_RULES" Status="Valid" UseForOutput="true" ModelId="10019"/>
                 </Models>
                 <Attributes>
                     <Attribute Name="MODEL_SCHEMA" DataType="VARCHAR2" Status="Valid"/>
@@ -256,7 +252,7 @@ UNPIVOT EXCLUDE NULLS
             </SQLQueryOutputColumns>
         </SQLQuery>
         <SQLQuery HasWithClause="false" GenerateView="false" ViewName="OUTPUT_3_3" Id="10014" Name="結果の整形" Status="Complete">
-            <Icon XCOORD="712" YCOORD="131"></Icon>
+            <Icon XCOORD="659" YCOORD="268"></Icon>
             <Messages/>
             <Parallelism Enable="false">
                 <SystemDetermined/>
@@ -310,11 +306,6 @@ FROM
                 <Coordinates XCoordinate="0.0" YCoordinate="0.0"/>
             </ConnectorGraphicsInfo>
         </Link>
-        <Link Id="10010" From="10007" To="10009" Name="リンク" Label="元 &quot;相関構築&quot; 先 &quot;モデル詳細&quot;">
-            <ConnectorGraphicsInfo>
-                <Coordinates XCoordinate="0.0" YCoordinate="0.0"/>
-            </ConnectorGraphicsInfo>
-        </Link>
         <Link Id="10013" From="10002" To="10012" Name="リンク" Label="元 &quot;UNPIVOT 変換&quot; 先 &quot;相関構築 support=0.5&quot;">
             <ConnectorGraphicsInfo>
                 <Coordinates XCoordinate="0.0" YCoordinate="0.0"/>
@@ -326,6 +317,11 @@ FROM
             </ConnectorGraphicsInfo>
         </Link>
         <Link Id="10017" From="10014" To="10016" Name="リンク" Label="元 &quot;結果の整形&quot; 先 &quot;FRUIT_SUGGESTION&quot;">
+            <ConnectorGraphicsInfo>
+                <Coordinates XCoordinate="0.0" YCoordinate="0.0"/>
+            </ConnectorGraphicsInfo>
+        </Link>
+        <Link Id="10020" From="10012" To="10009" Name="リンク" Label="元 &quot;相関構築 support=0.5&quot; 先 &quot;モデル詳細&quot;">
             <ConnectorGraphicsInfo>
                 <Coordinates XCoordinate="0.0" YCoordinate="0.0"/>
             </ConnectorGraphicsInfo>
