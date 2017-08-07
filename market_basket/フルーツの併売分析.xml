@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<WorkflowProcess Version="12.2.0.0.1" DBVersion="12.2.0.1.0" Schema="" xmlns="http://xmlns.oracle.com/odmr11">
+    <Nodes>
+        <DataSource Id="10001" Name="FRUIT_TABLE" Status="Complete">
+            <Icon XCOORD="106" YCOORD="129"></Icon>
+            <Messages/>
+            <Parallelism Enable="false">
+                <SystemDetermined/>
+            </Parallelism>
+            <CacheSettings UseFullData="false" GenerateCache="false">
+                <NumberOfRows>2000</NumberOfRows>
+                <Method>
+                    <TopN/>
+                </Method>
+            </CacheSettings>
+            <SQLExpression>"N$10001" as (select "FRUIT_TABLE"."APPLE", 
+"FRUIT_TABLE"."PAPAYA", 
+"FRUIT_TABLE"."MANGO", 
+"FRUIT_TABLE"."ID", 
+"FRUIT_TABLE"."PINEAPPLE", 
+"FRUIT_TABLE"."BANANA", 
+"FRUIT_TABLE"."MELON", 
+"FRUIT_TABLE"."ORANGE" 
+from "DMUSER"."FRUIT_TABLE"  )</SQLExpression>
+            <Attributes>
+                <Attribute Name="APPLE" DataType="NUMBER" Status="Valid"/>
+                <Attribute Name="PAPAYA" DataType="NUMBER" Status="Valid"/>
+                <Attribute Name="MANGO" DataType="NUMBER" Status="Valid"/>
+                <Attribute Name="ID" DataType="NUMBER" Status="Valid"/>
+                <Attribute Name="PINEAPPLE" DataType="NUMBER" Status="Valid"/>
+                <Attribute Name="BANANA" DataType="NUMBER" Status="Valid"/>
+                <Attribute Name="MELON" DataType="NUMBER" Status="Valid"/>
+                <Attribute Name="ORANGE" DataType="NUMBER" Status="Valid"/>
+            </Attributes>
+            <SourceTable Schema="" Name="FRUIT_TABLE" Synonym="false"/>
+            <JSONColumns/>
+            <DataGuideSettings Generate="true" UseFullData="false" UseFullDoc="false">
+                <NumberOfRows>2000</NumberOfRows>
+                <NumberOfValues>10000</NumberOfValues>
+            </DataGuideSettings>
+        </DataSource>
+        <CreateTable TableName="FRUIT_UNPIVOT" Table="true" AutoSpec="Yes" Id="10004" Name="FRUIT_UNPIVOT" Status="Ready">
+            <Icon XCOORD="202" YCOORD="323"></Icon>
+            <Messages/>
+            <Parallelism Enable="false">
+                <SystemDetermined/>
+            </Parallelism>
+            <CacheSettings UseFullData="false" GenerateCache="false">
+                <NumberOfRows>2000</NumberOfRows>
+                <Method>
+                    <TopN/>
+                </Method>
+            </CacheSettings>
+            <SQLExpression>"N$10004" as (SELECT 
+"TRANSACTION_ID",
+"KEY_NAME",
+"NUM_SALES"
+ FROM {INPUT_SOURCE} )</SQLExpression>
+            <DBAttributes>
+                <DBAttribute Key="No" Index="No" Name="TRANSACTION_ID" DataType="NUMBER" Status="Valid"/>
+                <DBAttribute Key="No" Index="No" Name="KEY_NAME" DataType="VARCHAR2" Status="Valid"/>
+                <DBAttribute Key="No" Index="No" Name="NUM_SALES" DataType="NUMBER" Status="Valid"/>
+            </DBAttributes>
+            <JSONColumns/>
+            <CreateTableOptions>
+                <Logging>NOLOGGING</Logging>
+                <TableCompression>ROW STORE COMPRESS</TableCompression>
+            </CreateTableOptions>
+        </CreateTable>
+        <CreateTable TableName="OUTPUT_4_3" Table="true" Id="10016" Name="FRUIT_SUGGESTION" Status="Complete">
+            <Icon XCOORD="874" YCOORD="132"></Icon>
+            <Messages/>
+            <Parallelism Enable="false">
+                <SystemDetermined/>
+            </Parallelism>
+            <CacheSettings UseFullData="false" GenerateCache="false">
+                <NumberOfRows>2000</NumberOfRows>
+                <Method>
+                    <TopN/>
+                </Method>
+            </CacheSettings>
+            <SQLExpression>"N$10016" AS ( SELECT  "ANTECEDENT" ,
+ "CONSEQUENT" ,
+ "SUPPORT" ,
+ "CONFIDENCE" ,
+ "LIFT"  FROM "OUTPUT_4_3")</SQLExpression>
+            <DBAttributes>
+                <DBAttribute Key="No" Index="No" Name="ANTECEDENT" DataType="VARCHAR2" Status="Valid"/>
+                <DBAttribute Key="No" Index="No" Name="CONSEQUENT" DataType="VARCHAR2" Status="Valid"/>
+                <DBAttribute Key="No" Index="No" Name="SUPPORT" DataType="NUMBER" Status="Valid"/>
+                <DBAttribute Key="No" Index="No" Name="CONFIDENCE" DataType="NUMBER" Status="Valid"/>
+                <DBAttribute Key="No" Index="No" Name="LIFT" DataType="NUMBER" Status="Valid"/>
+            </DBAttributes>
+            <JSONColumns/>
+            <DataGuideSettings Generate="true" UseFullData="false" UseFullDoc="false">
+                <NumberOfRows>2000</NumberOfRows>
+                <NumberOfValues>10000</NumberOfValues>
+            </DataGuideSettings>
+            <CreateTableOptions>
+                <Logging>NOLOGGING</Logging>
+                <TableCompression>ROW STORE COMPRESS</TableCompression>
+            </CreateTableOptions>
+        </CreateTable>
+        <AssociationBuild MaxDistinctItemValue="10" ASSO_GENERATE_PREPROCESSED_TABLE="false" ASSO_PREPROCESSED_TABLE_NAME="NONE" MaxNumPartitions="1000" ODMS_SAMPLING="false" Id="10007" Name="相関構築" Status="Complete">
+            <Icon XCOORD="409" YCOORD="131"></Icon>
+            <Messages/>
+            <Parallelism Enable="false">
+                <SystemDetermined/>
+            </Parallelism>
+            <BuildDataSource SourceId="10002"/>
+            <CaseAttributes>
+                <Attribute Name="TRANSACTION_ID" DataType="NUMBER" Status="Valid"/>
+            </CaseAttributes>
+            <MiningAttributes AutoSpec="Yes">
+                <MiningAttribute AutoPrep="Yes" MiningType="Categorical" Input="Yes" Name="KEY_NAME" DataType="VARCHAR2" Status="Valid"/>
+                <MiningAttribute AutoPrep="Yes" MiningType="Numerical" Input="Yes" Name="NUM_SALES" DataType="NUMBER" Status="Valid"/>
+                <MiningAttribute AutoPrep="Yes" MiningType="Numerical" Input="Yes" Name="TRANSACTION_ID" DataType="NUMBER" Status="Valid"/>
+            </MiningAttributes>
+            <ItemID Name="KEY_NAME" DataType="VARCHAR2" Status="Valid"/>
+            <Models>
+                <AprioriModel Id="10006" Name="ASSOC_AP_1_3" Status="Complete" CreationDate="2017-08-07T15:32:38" Annotation="" UseForOutput="true">
+                    <InputMiningData DataUsage="MANUAL" MiningUsage="MANUAL">
+                        <MiningAttributes>
+                            <MiningAttribute AutoPrep="Yes" MiningType="Numerical" Input="Yes" Name="TRANSACTION_ID" DataType="NUMBER" Status="Valid"/>
+                            <MiningAttribute AutoPrep="Yes" MiningType="Categorical" Input="Yes" Name="KEY_NAME" DataType="VARCHAR2" Status="Valid"/>
+                            <MiningAttribute AutoPrep="Yes" MiningType="Numerical" Input="Yes" Name="NUM_SALES" DataType="NUMBER" Status="Valid"/>
+                        </MiningAttributes>
+                    </InputMiningData>
+                    <AprioriAlgo ASSO_FILTERS_ACTIVE="false">
+                        <ASSO_MAX_RULE_LENGTH>4</ASSO_MAX_RULE_LENGTH>
+                        <ASSO_MIN_CONFIDENCE>0.1</ASSO_MIN_CONFIDENCE>
+                        <ASSO_MIN_SUPPORT>0.01</ASSO_MIN_SUPPORT>
+                        <ASSO_MIN_REV_CONFIDENCE>0.0</ASSO_MIN_REV_CONFIDENCE>
+                        <ASSO_MIN_SUPPORT_INT>1</ASSO_MIN_SUPPORT_INT>
+                    </AprioriAlgo>
+                </AprioriModel>
+            </Models>
+        </AssociationBuild>
+        <AssociationBuild MaxDistinctItemValue="10" ASSO_GENERATE_PREPROCESSED_TABLE="false" ASSO_PREPROCESSED_TABLE_NAME="NONE" MaxNumPartitions="1000" ODMS_SAMPLING="false" Id="10012" Name="相関構築 support=0.5" Status="Complete">
+            <Icon XCOORD="409" YCOORD="273"></Icon>
+            <Messages/>
+            <Parallelism Enable="false">
+                <SystemDetermined/>
+            </Parallelism>
+            <BuildDataSource SourceId="10002"/>
+            <CaseAttributes>
+                <Attribute Name="TRANSACTION_ID" DataType="NUMBER" Status="Valid"/>
+            </CaseAttributes>
+            <MiningAttributes AutoSpec="Yes">
+                <MiningAttribute AutoPrep="Yes" MiningType="Numerical" Input="Yes" Name="TRANSACTION_ID" DataType="NUMBER" Status="Valid"/>
+                <MiningAttribute AutoPrep="Yes" MiningType="Categorical" Input="Yes" Name="KEY_NAME" DataType="VARCHAR2" Status="Valid"/>
+                <MiningAttribute AutoPrep="Yes" MiningType="Numerical" Input="Yes" Name="NUM_SALES" DataType="NUMBER" Status="Valid"/>
+            </MiningAttributes>
+            <ItemID Name="KEY_NAME" DataType="VARCHAR2" Status="Valid"/>
+            <Models>
+                <AprioriModel Id="10011" Name="ASSOC_AP_2_3" Status="Complete" CreationDate="2017-08-07T15:33:15" Annotation="" UseForOutput="true">
+                    <InputMiningData DataUsage="MANUAL" MiningUsage="MANUAL">
+                        <MiningAttributes>
+                            <MiningAttribute AutoPrep="Yes" MiningType="Numerical" Input="Yes" Name="TRANSACTION_ID" DataType="NUMBER" Status="Valid"/>
+                            <MiningAttribute AutoPrep="Yes" MiningType="Categorical" Input="Yes" Name="KEY_NAME" DataType="VARCHAR2" Status="Valid"/>
+                            <MiningAttribute AutoPrep="Yes" MiningType="Numerical" Input="Yes" Name="NUM_SALES" DataType="NUMBER" Status="Valid"/>
+                        </MiningAttributes>
+                    </InputMiningData>
+                    <AprioriAlgo ASSO_FILTERS_ACTIVE="false">
+                        <ASSO_MAX_RULE_LENGTH>4</ASSO_MAX_RULE_LENGTH>
+                        <ASSO_MIN_CONFIDENCE>0.1</ASSO_MIN_CONFIDENCE>
+                        <ASSO_MIN_SUPPORT>0.005</ASSO_MIN_SUPPORT>
+                        <ASSO_MIN_REV_CONFIDENCE>0.0</ASSO_MIN_REV_CONFIDENCE>
+                        <ASSO_MIN_SUPPORT_INT>1</ASSO_MIN_SUPPORT_INT>
+                    </AprioriAlgo>
+                </AprioriModel>
+            </Models>
+        </AssociationBuild>
+        <ModelDetails Id="10009" Name="モデル詳細" Status="Complete">
+            <Icon XCOORD="563" YCOORD="132"></Icon>
+            <Messages/>
+            <Parallelism Enable="false">
+                <SystemDetermined/>
+            </Parallelism>
+            <CacheSettings UseFullData="false" GenerateCache="false">
+                <NumberOfRows>2000</NumberOfRows>
+                <Method>
+                    <TopN/>
+                </Method>
+            </CacheSettings>
+            <SQLExpression>"N$10009" as (
+     SELECT CAST('DMUSER' AS VARCHAR2(128)) as "MODEL_SCHEMA", 
+     CAST('ASSOC_AP_1_3' AS VARCHAR2(128)) as "MODEL_NAME", 
+     PARTITION_NAME as "PARTITION_NAME", 
+     RULE_ID as "ID", 
+     CAST(XMLQUERY('string-join(//item/string-join(("KEY_NAME", item_name),".") , ", ")' PASSING ANTECEDENT RETURNING CONTENT) AS VARCHAR2(4000)) as "ANTECEDENT_ITEMS",
+     ('KEY_NAME' || '.' || CONSEQUENT_NAME) as "CONSEQUENT_ITEMS",
+     RULE_SUPPORT AS "SUPPORT",
+     RULE_CONFIDENCE AS "CONFIDENCE",
+     RULE_REVCONFIDENCE AS "REVCONFIDENCE",
+     RULE_LIFT AS "LIFT",
+     ANTECEDENT_SUPPORT AS "ANTECEDENT_SUPPORT",
+     CONSEQUENT_SUPPORT AS CONSEQUENT_SUPPORT,
+     NUMBER_OF_ITEMS - 1 AS LENGTH
+     FROM DMUSER.DM$VRASSOC_AP_1_3 )</SQLExpression>
+            <ModelDetailsOutput Type="ARRulesStringVersion" MiningFunction="ASSOCIATION" MiningAlgorithm="APRIORI_ASSOCIATION_RULES" AutoSpec="Yes">
+                <Models>
+                    <Model IsModelBuilt="false" NodeId="10007" Schema="" Name="ASSOC_AP_1_3" MiningFunction="ASSOCIATION" MiningAlgorithm="APRIORI_ASSOCIATION_RULES" Status="Valid" UseForOutput="true" ModelId="10006"/>
+                </Models>
+                <Attributes>
+                    <Attribute Name="MODEL_SCHEMA" DataType="VARCHAR2" Status="Valid"/>
+                    <Attribute Name="MODEL_NAME" DataType="VARCHAR2" Status="Valid"/>
+                    <Attribute Name="PARTITION_NAME" DataType="VARCHAR2" Status="Valid"/>
+                    <Attribute Name="ID" DataType="NUMBER" Status="Valid"/>
+                    <Attribute Name="ANTECEDENT_ITEMS" DataType="VARCHAR2" Status="Valid"/>
+                    <Attribute Name="CONSEQUENT_ITEMS" DataType="VARCHAR2" Status="Valid"/>
+                    <Attribute Name="SUPPORT" DataType="NUMBER" Status="Valid"/>
+                    <Attribute Name="CONFIDENCE" DataType="NUMBER" Status="Valid"/>
+                    <Attribute Name="REVCONFIDENCE" DataType="NUMBER" Status="Valid"/>
+                    <Attribute Name="LIFT" DataType="NUMBER" Status="Valid"/>
+                    <Attribute Name="ANTECEDENT_SUPPORT" DataType="NUMBER" Status="Valid"/>
+                    <Attribute Name="CONSEQUENT_SUPPORT" DataType="NUMBER" Status="Valid"/>
+                    <Attribute Name="LENGTH" DataType="NUMBER" Status="Valid"/>
+                </Attributes>
+            </ModelDetailsOutput>
+        </ModelDetails>
+        <SQLQuery HasWithClause="false" GenerateView="false" ViewName="OUTPUT_1_3" Id="10002" Name="UNPIVOT 変換" Status="Complete">
+            <Icon XCOORD="265" YCOORD="130"></Icon>
+            <Messages/>
+            <Parallelism Enable="false">
+                <SystemDetermined/>
+            </Parallelism>
+            <CacheSettings UseFullData="false" GenerateCache="false">
+                <NumberOfRows>2000</NumberOfRows>
+                <Method>
+                    <TopN/>
+                </Method>
+            </CacheSettings>
+            <SQLExpression>"FRUIT_TABLE_N$10001" as (SELECT * FROM {INPUT_SOURCE:10001}),
+"N$10002" as (SELECT
+  id AS transaction_id
+, key_name
+, num_sales
+FROM "FRUIT_TABLE_N$10001"
+UNPIVOT EXCLUDE NULLS
+  (num_sales FOR key_name IN
+    (apple, orange, banana, melon, mango, papaya, pineapple)))
+</SQLExpression>
+            <SQLQueryExpression>SELECT
+  id AS transaction_id
+, key_name
+, num_sales
+FROM "FRUIT_TABLE_N$10001"
+UNPIVOT EXCLUDE NULLS
+  (num_sales FOR key_name IN
+    (apple, orange, banana, melon, mango, papaya, pineapple))</SQLQueryExpression>
+            <SQLQueryOutputColumns>
+                <Attribute Name="TRANSACTION_ID" DataType="NUMBER" Status="Valid"/>
+                <Attribute Name="KEY_NAME" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="NUM_SALES" DataType="NUMBER" Status="Valid"/>
+            </SQLQueryOutputColumns>
+        </SQLQuery>
+        <SQLQuery HasWithClause="false" GenerateView="false" ViewName="OUTPUT_3_3" Id="10014" Name="結果の整形" Status="Complete">
+            <Icon XCOORD="712" YCOORD="131"></Icon>
+            <Messages/>
+            <Parallelism Enable="false">
+                <SystemDetermined/>
+            </Parallelism>
+            <CacheSettings UseFullData="false" GenerateCache="false">
+                <NumberOfRows>2000</NumberOfRows>
+                <Method>
+                    <TopN/>
+                </Method>
+            </CacheSettings>
+            <SQLExpression>"モデル詳細_N$10009" as (SELECT * FROM {INPUT_SOURCE:10009}),
+"N$10014" as (SELECT
+  UPPER(REPLACE(REPLACE(ANTECEDENT_ITEMS,'KEY_NAME.'),' =  ')) AS ANTECEDENT
+, UPPER(REPLACE(REPLACE(CONSEQUENT_ITEMS,'KEY_NAME.'),' =  ')) AS CONSEQUENT
+, SUPPORT
+, CONFIDENCE
+, LIFT
+FROM
+  "モデル詳細_N$10009")
+</SQLExpression>
+            <SQLQueryExpression>SELECT
+  UPPER(REPLACE(REPLACE(ANTECEDENT_ITEMS,'KEY_NAME.'),' =  ')) AS ANTECEDENT
+, UPPER(REPLACE(REPLACE(CONSEQUENT_ITEMS,'KEY_NAME.'),' =  ')) AS CONSEQUENT
+, SUPPORT
+, CONFIDENCE
+, LIFT
+FROM
+  "モデル詳細_N$10009"</SQLQueryExpression>
+            <SQLQueryOutputColumns>
+                <Attribute Name="ANTECEDENT" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="CONSEQUENT" DataType="VARCHAR2" Status="Valid"/>
+                <Attribute Name="SUPPORT" DataType="NUMBER" Status="Valid"/>
+                <Attribute Name="CONFIDENCE" DataType="NUMBER" Status="Valid"/>
+                <Attribute Name="LIFT" DataType="NUMBER" Status="Valid"/>
+            </SQLQueryOutputColumns>
+        </SQLQuery>
+    </Nodes>
+    <Links>
+        <Link Id="10003" From="10001" To="10002" Name="リンク" Label="元 &quot;FRUIT_TABLE&quot; 先 &quot;UNPIVOT 変換&quot;">
+            <ConnectorGraphicsInfo>
+                <Coordinates XCoordinate="0.0" YCoordinate="0.0"/>
+            </ConnectorGraphicsInfo>
+        </Link>
+        <Link Id="10005" From="10002" To="10004" Name="リンク" Label="元 &quot;UNPIVOT 変換&quot; 先 &quot;FRUIT_UNPIVOT&quot;">
+            <ConnectorGraphicsInfo>
+                <Coordinates XCoordinate="0.0" YCoordinate="0.0"/>
+            </ConnectorGraphicsInfo>
+        </Link>
+        <Link Id="10008" From="10002" To="10007" Name="リンク" Label="元 &quot;UNPIVOT 変換&quot; 先 &quot;相関構築&quot;">
+            <ConnectorGraphicsInfo>
+                <Coordinates XCoordinate="0.0" YCoordinate="0.0"/>
+            </ConnectorGraphicsInfo>
+        </Link>
+        <Link Id="10010" From="10007" To="10009" Name="リンク" Label="元 &quot;相関構築&quot; 先 &quot;モデル詳細&quot;">
+            <ConnectorGraphicsInfo>
+                <Coordinates XCoordinate="0.0" YCoordinate="0.0"/>
+            </ConnectorGraphicsInfo>
+        </Link>
+        <Link Id="10013" From="10002" To="10012" Name="リンク" Label="元 &quot;UNPIVOT 変換&quot; 先 &quot;相関構築 support=0.5&quot;">
+            <ConnectorGraphicsInfo>
+                <Coordinates XCoordinate="0.0" YCoordinate="0.0"/>
+            </ConnectorGraphicsInfo>
+        </Link>
+        <Link Id="10015" From="10009" To="10014" Name="リンク" Label="元 &quot;モデル詳細&quot; 先 &quot;結果の整形&quot;">
+            <ConnectorGraphicsInfo>
+                <Coordinates XCoordinate="0.0" YCoordinate="0.0"/>
+            </ConnectorGraphicsInfo>
+        </Link>
+        <Link Id="10017" From="10014" To="10016" Name="リンク" Label="元 &quot;結果の整形&quot; 先 &quot;FRUIT_SUGGESTION&quot;">
+            <ConnectorGraphicsInfo>
+                <Coordinates XCoordinate="0.0" YCoordinate="0.0"/>
+            </ConnectorGraphicsInfo>
+        </Link>
+    </Links>
+</WorkflowProcess>
