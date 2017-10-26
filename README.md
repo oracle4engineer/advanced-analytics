@@ -27,12 +27,12 @@
       </center></td>
     </tr>
     <tr>
-      <td><center>
+      <td valign="top"><center>
         <u><strong>顧客の不足情報を補足</strong></u>&nbsp;<br>
         準備中&nbsp;<br>
         </center>
       </td>
-      <td><center>
+      <td valign="top"><center>
           <u><strong>ビールの需要予測</strong></u>&nbsp;<br>
         準備中&nbsp;<br>
       </center>
