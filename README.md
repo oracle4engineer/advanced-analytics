@@ -46,7 +46,7 @@
 <p>※ 製品の概要については<a href="https://github.com/oracle4engineer/advanced-analytics/wiki" title="Oracleの高度な機械学習" target="_blank">こちら</a>から
   <br>
 </p>
-<p><Div Align="right"><a href="https://www.facebook.com/OracleJapanBI/"><img src="image/FB_logo.png" width="29" height="29" alt=""/></a>　<strong>Oracle Business Analytics Japan</strong></Div></p>
+<p><Div Align="right"><a href="https://www.facebook.com/OracleJapanBI/" target="_blank"><img src="image/FB_logo.png" width="29" height="29" alt=""/></a>　<strong>Oracle Business Analytics Japan</strong></Div></p>
   <br>
 </body>
 </html>
