@@ -28,16 +28,16 @@
     </tr>
     <tr>
       <td><center>
-        <strong><u>顧客の不足情報を補足</u></strong>&nbsp;<br>
-        準備中
+        <u><strong>顧客の不足情報を補足</strong></u>&nbsp;<br>
+        準備中&nbsp;<br>
         </center>
       </td>
       <td><center>
-          <strong><u>ビールの需要予測</u></strong>&nbsp;<br>
-        準備中
+          <u><strong>ビールの需要予測</strong></u>&nbsp;<br>
+        準備中&nbsp;<br>
       </center>
       </td>
-      <td>XXXXXXX&nbsp;</td>
+      <td><img src="image/candy_wip.png" height="120" alt="Classification"/>&nbsp;</td>
     </tr>
   </tbody>
 </table>
@@ -46,7 +46,7 @@
 <p>※ 製品の概要については<a href="https://github.com/oracle4engineer/advanced-analytics/wiki" title="Oracleの高度な機械学習" target="_blank">こちら</a>から
   <br>
 </p>
-<p><a href="https://www.facebook.com/OracleJapanBI/"><img src="image/FB_logo.png" width="29" height="29" alt=""/></a>　<strong>Oracle Business Analytics Japan</strong></p>
+<p><blockquote><blockquote><blockquote><blockquote><blockquote><a href="https://www.facebook.com/OracleJapanBI/"><img src="image/FB_logo.png" width="29" height="29" alt=""/></a>　<strong>Oracle Business Analytics Japan</strong></blockquote></blockquote></blockquote></blockquote></blockquote></p>
   <br>
 </body>
 </html>
