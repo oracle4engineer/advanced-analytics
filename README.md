@@ -21,7 +21,7 @@
       </center></td>
       <td width = "34%"><center>
       <u><strong>保険顧客の購買予測</strong></u><strong></strong><br>
-      <a href="https://github.com/noriko33/test00/wiki/%E5%88%86%E9%A1%9E-(Classification)" target="_blank">
+      <a href="https://github.com/oracle4engineer/advanced-analytics/wiki/%E5%88%86%E9%A1%9E-(Classification)" target="_blank">
       <img src="image/classification_top.JPG" height="120" alt="Classification"/>
       </a>
       </center></td>
