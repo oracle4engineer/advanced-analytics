@@ -4,7 +4,7 @@
 </head>
 
 <body>
-<h2>Oracle Advance Analytics ソリューション</h2>
+<h2>Oracle Advance Analytics ユースケース</h2>
 
 <table width="80%" border="0" >
   <tbody>
